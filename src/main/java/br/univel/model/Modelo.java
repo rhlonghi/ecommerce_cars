@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import br.univel.model.Marca;
+import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
 
 @Entity
 @Table(name = "modelo")
@@ -22,6 +25,12 @@ public class Modelo implements Serializable
    @Version
    @Column(name = "version")
    private int version;
+
+   @Column(length = 50, name = "nome", nullable = false)
+   private String nome;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   private Marca marca;
 
    public Long getId()
    {
@@ -41,15 +50,6 @@ public class Modelo implements Serializable
    public void setVersion(final int version)
    {
       this.version = version;
-   }
-
-   @Override
-   public String toString()
-   {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      return result;
    }
 
    @Override
@@ -81,5 +81,34 @@ public class Modelo implements Serializable
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
       return result;
+   }
+
+   public String getNome()
+   {
+      return nome;
+   }
+
+   public void setNome(String nome)
+   {
+      this.nome = nome;
+   }
+
+   @Override
+   public String toString()
+   {
+      String result = getClass().getSimpleName() + " ";
+      if (nome != null && !nome.trim().isEmpty())
+         result += "nome: " + nome;
+      return result;
+   }
+
+   public Marca getMarca()
+   {
+      return this.marca;
+   }
+
+   public void setMarca(final Marca marca)
+   {
+      this.marca = marca;
    }
 }
