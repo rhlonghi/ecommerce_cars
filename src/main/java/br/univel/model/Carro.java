@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import br.univel.model.Categoria;
+import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "carro")
@@ -22,6 +25,30 @@ public class Carro implements Serializable
    @Version
    @Column(name = "version")
    private int version;
+
+   @Column(length = 100, name = "descricao", nullable = false)
+   private String descricao;
+
+   @Column(length = 4, name = "ano", nullable = false)
+   private Integer ano;
+
+   @Column(length = 10, name = "km", nullable = false)
+   private Double km;
+
+   @Column(length = 50, name = "cor", nullable = false)
+   private String cor;
+
+   @Column(length = 10, name = "nportas", nullable = false)
+   private Integer nportas;
+
+   @Column(length = 20, name = "combustivel", nullable = false)
+   private String combustivel;
+
+   @Column(length = 20, name = "cambio", nullable = false)
+   private String cambio;
+
+   @ManyToOne(cascade = CascadeType.ALL)
+   private Categoria categoria;
 
    public Long getId()
    {
@@ -41,15 +68,6 @@ public class Carro implements Serializable
    public void setVersion(final int version)
    {
       this.version = version;
-   }
-
-   @Override
-   public String toString()
-   {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      return result;
    }
 
    @Override
@@ -81,5 +99,106 @@ public class Carro implements Serializable
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
       return result;
+   }
+
+   public String getDescricao()
+   {
+      return descricao;
+   }
+
+   public void setDescricao(String descricao)
+   {
+      this.descricao = descricao;
+   }
+
+   public Integer getAno()
+   {
+      return ano;
+   }
+
+   public void setAno(Integer ano)
+   {
+      this.ano = ano;
+   }
+
+   public Double getKm()
+   {
+      return km;
+   }
+
+   public void setKm(Double km)
+   {
+      this.km = km;
+   }
+
+   public String getCor()
+   {
+      return cor;
+   }
+
+   public void setCor(String cor)
+   {
+      this.cor = cor;
+   }
+
+   public Integer getNportas()
+   {
+      return nportas;
+   }
+
+   public void setNportas(Integer nportas)
+   {
+      this.nportas = nportas;
+   }
+
+   public String getCombustivel()
+   {
+      return combustivel;
+   }
+
+   public void setCombustivel(String combustivel)
+   {
+      this.combustivel = combustivel;
+   }
+
+   public String getCambio()
+   {
+      return cambio;
+   }
+
+   public void setCambio(String cambio)
+   {
+      this.cambio = cambio;
+   }
+
+   @Override
+   public String toString()
+   {
+      String result = getClass().getSimpleName() + " ";
+      if (descricao != null && !descricao.trim().isEmpty())
+         result += "descricao: " + descricao;
+      if (ano != null)
+         result += ", ano: " + ano;
+      if (km != null)
+         result += ", km: " + km;
+      if (cor != null && !cor.trim().isEmpty())
+         result += ", cor: " + cor;
+      if (nportas != null)
+         result += ", nportas: " + nportas;
+      if (combustivel != null && !combustivel.trim().isEmpty())
+         result += ", combustivel: " + combustivel;
+      if (cambio != null && !cambio.trim().isEmpty())
+         result += ", cambio: " + cambio;
+      return result;
+   }
+
+   public Categoria getCategoria()
+   {
+      return this.categoria;
+   }
+
+   public void setCategoria(final Categoria categoria)
+   {
+      this.categoria = categoria;
    }
 }
