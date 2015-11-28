@@ -32,7 +32,7 @@ public class Item implements Serializable
    @Column(name = "valorCarro")
    private Double valorCarro;
 
-   @Column(length = 10, name = "quantidade")
+   @Column(name = "quantidade")
    private Integer quantidade;
 
    public Long getId()

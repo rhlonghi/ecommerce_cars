@@ -23,16 +23,16 @@ public class Usuario implements Serializable
    @Column(name = "version")
    private int version;
 
-   @Column(length = 100, name = "nome", nullable = false)
+   @Column(name = "nome")
    private String nome;
 
-   @Column(length = 20, name = "login", nullable = false)
+   @Column(name = "login")
    private String login;
 
-   @Column(length = 20, name = "senha", nullable = false)
+   @Column(name = "senha")
    private String senha;
 
-   @Column(length = 100, name = "email", nullable = false)
+   @Column(name = "email")
    private String email;
 
    public Long getId()

@@ -28,7 +28,7 @@ public class Categoria implements Serializable
    @Column(name = "version")
    private int version;
 
-   @Column(length = 100, name = "descricao", nullable = false)
+   @Column(name = "descricao")
    private String descricao;
 
    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)

@@ -1,17 +1,17 @@
 package br.univel.model;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Id;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.Version;
-import java.lang.Override;
-import br.univel.model.Categoria;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "carro")
@@ -26,28 +26,28 @@ public class Carro implements Serializable
    @Column(name = "version")
    private int version;
 
-   @Column(length = 100, name = "descricao", nullable = false)
+   @Column(name = "descricao")
    private String descricao;
 
-   @Column(length = 4, name = "ano", nullable = false)
+   @Column(name = "ano")
    private Integer ano;
 
-   @Column(length = 10, name = "km", nullable = false)
+   @Column(name = "km")
    private Double km;
 
-   @Column(length = 50, name = "cor", nullable = false)
+   @Column(name = "cor")
    private String cor;
 
-   @Column(length = 10, name = "nportas", nullable = false)
+   @Column(name = "nportas")
    private Integer nportas;
 
-   @Column(length = 20, name = "combustivel", nullable = false)
+   @Column(name = "combustivel")
    private String combustivel;
 
-   @Column(length = 20, name = "cambio", nullable = false)
+   @Column(name = "cambio")
    private String cambio;
 
-   @ManyToOne(cascade = CascadeType.ALL)
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    private Categoria categoria;
 
    public Long getId()

@@ -26,7 +26,7 @@ public class Modelo implements Serializable
    @Column(name = "version")
    private int version;
 
-   @Column(length = 50, name = "nome", nullable = false)
+   @Column(name = "nome")
    private String nome;
 
    @ManyToOne(fetch = FetchType.LAZY)
