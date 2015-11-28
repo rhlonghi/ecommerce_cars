@@ -1,0 +1,80 @@
+<header ng-switch on="$location.path().indexOf('/Carros/new') > -1">
+    <h3 ng-switch-when="true">Create a new Carro</h3>
+    <h3 ng-switch-when="false">View or edit Carro</h3>
+</header>
+<form id="CarroForm" name="CarroForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.descricao.$invalid}">
+        <label for="descricao" class="col-sm-2 control-label">Descricao</label>
+        <div id="descricaoControls" class="col-sm-10">
+            <input id="descricao" name="descricao" type="text" class="form-control" ng-model="carro.descricao" placeholder="Enter the Carro Descricao"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.ano.$invalid}">
+        <label for="ano" class="col-sm-2 control-label">Ano</label>
+        <div id="anoControls" class="col-sm-10">
+            <input id="ano" name="ano" type="number" class="form-control" ng-model="carro.ano" placeholder="Enter the Carro Ano"></input>
+            <span class="help-block error" ng-show="CarroForm.ano.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.km.$invalid}">
+        <label for="km" class="col-sm-2 control-label">Km</label>
+        <div id="kmControls" class="col-sm-10">
+            <input id="km" name="km" type="number" class="form-control" ng-model="carro.km" placeholder="Enter the Carro Km"></input>
+            <span class="help-block error" ng-show="CarroForm.km.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.cor.$invalid}">
+        <label for="cor" class="col-sm-2 control-label">Cor</label>
+        <div id="corControls" class="col-sm-10">
+            <input id="cor" name="cor" type="text" class="form-control" ng-model="carro.cor" placeholder="Enter the Carro Cor"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.nportas.$invalid}">
+        <label for="nportas" class="col-sm-2 control-label">Nportas</label>
+        <div id="nportasControls" class="col-sm-10">
+            <input id="nportas" name="nportas" type="number" class="form-control" ng-model="carro.nportas" placeholder="Enter the Carro Nportas"></input>
+            <span class="help-block error" ng-show="CarroForm.nportas.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.combustivel.$invalid}">
+        <label for="combustivel" class="col-sm-2 control-label">Combustivel</label>
+        <div id="combustivelControls" class="col-sm-10">
+            <input id="combustivel" name="combustivel" type="text" class="form-control" ng-model="carro.combustivel" placeholder="Enter the Carro Combustivel"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.cambio.$invalid}">
+        <label for="cambio" class="col-sm-2 control-label">Cambio</label>
+        <div id="cambioControls" class="col-sm-10">
+            <input id="cambio" name="cambio" type="text" class="form-control" ng-model="carro.cambio" placeholder="Enter the Carro Cambio"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CarroForm.categoria.$invalid}">
+        <label for="categoria" class="col-sm-2 control-label">Categoria</label>
+        <div id="categoriaControls" class="col-sm-10">
+        <select id="categoria" name="categoria" class="form-control" ng-model="categoriaSelection" ng-options="c.text for c in categoriaSelectionList"  >
+            <option value="">Choose a Categoria</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCarro" name="saveCarro" class="btn btn-primary" ng-disabled="isClean() || CarroForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteCarro" name="deleteCarro" class="btn btn-danger" ng-show="carro.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

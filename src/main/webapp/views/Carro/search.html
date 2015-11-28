@@ -1,0 +1,123 @@
+<div class="form-horizontal">
+    <h3>Create a new Carro</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/Carros/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for Carros</h3>
+    <form id="CarroSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="descricao" class="col-sm-2 control-label">Descricao</label>
+        <div class="col-sm-10">
+            <input id="descricao" name="descricao" class="form-control" type="text" ng-model="search.descricao" placeholder="Enter the Carro Descricao"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ano" class="col-sm-2 control-label">Ano</label>
+        <div class="col-sm-10">
+            <input id="ano" name="ano" class="form-control" type="text" ng-model="search.ano" placeholder="Enter the Carro Ano"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="km" class="col-sm-2 control-label">Km</label>
+        <div class="col-sm-10">
+            <input id="km" name="km" class="form-control" type="text" ng-model="search.km" placeholder="Enter the Carro Km"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cor" class="col-sm-2 control-label">Cor</label>
+        <div class="col-sm-10">
+            <input id="cor" name="cor" class="form-control" type="text" ng-model="search.cor" placeholder="Enter the Carro Cor"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nportas" class="col-sm-2 control-label">Nportas</label>
+        <div class="col-sm-10">
+            <input id="nportas" name="nportas" class="form-control" type="text" ng-model="search.nportas" placeholder="Enter the Carro Nportas"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="combustivel" class="col-sm-2 control-label">Combustivel</label>
+        <div class="col-sm-10">
+            <input id="combustivel" name="combustivel" class="form-control" type="text" ng-model="search.combustivel" placeholder="Enter the Carro Combustivel"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cambio" class="col-sm-2 control-label">Cambio</label>
+        <div class="col-sm-10">
+            <input id="cambio" name="cambio" class="form-control" type="text" ng-model="search.cambio" placeholder="Enter the Carro Cambio"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="categoria" class="col-sm-2 control-label">Categoria</label>
+        <div class="col-sm-10">
+            <select id="categoria" name="categoria" class="form-control" ng-model="search.categoria" ng-options="c as c.id for c in categoriaList">
+                <option value="">Choose a Categoria</option>
+            </select>
+        </div>
+    </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Descricao</th>
+                    <th>Ano</th>
+                    <th>Km</th>
+                    <th>Cor</th>
+                    <th>Nportas</th>
+                    <th>Combustivel</th>
+                    <th>Cambio</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.descricao}}</a></td>
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.ano}}</a></td>
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.km}}</a></td>
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.cor}}</a></td>
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.nportas}}</a></td>
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.combustivel}}</a></td>
+                    <td><a href="#/Carros/edit/{{result.id}}">{{result.cambio}}</a></td>
+                        <td><a href="#/Carros/edit/{{result.id}}">{{result.categoria.id}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>
