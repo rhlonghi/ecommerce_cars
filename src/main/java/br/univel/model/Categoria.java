@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import java.util.Set;
+import java.util.HashSet;
+import br.univel.model.Carro;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "categoria")
@@ -22,6 +27,12 @@ public class Categoria implements Serializable
    @Version
    @Column(name = "version")
    private int version;
+
+   @Column(length = 100, name = "descricao", nullable = false)
+   private String descricao;
+
+   @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+   private Set<Carro> carros = new HashSet<Carro>();
 
    public Long getId()
    {
@@ -41,15 +52,6 @@ public class Categoria implements Serializable
    public void setVersion(final int version)
    {
       this.version = version;
-   }
-
-   @Override
-   public String toString()
-   {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      return result;
    }
 
    @Override
@@ -81,5 +83,34 @@ public class Categoria implements Serializable
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
       return result;
+   }
+
+   public String getDescricao()
+   {
+      return descricao;
+   }
+
+   public void setDescricao(String descricao)
+   {
+      this.descricao = descricao;
+   }
+
+   @Override
+   public String toString()
+   {
+      String result = getClass().getSimpleName() + " ";
+      if (descricao != null && !descricao.trim().isEmpty())
+         result += "descricao: " + descricao;
+      return result;
+   }
+
+   public Set<Carro> getCarros()
+   {
+      return this.carros;
+   }
+
+   public void setCarros(final Set<Carro> carros)
+   {
+      this.carros = carros;
    }
 }
