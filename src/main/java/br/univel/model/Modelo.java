@@ -1,25 +1,26 @@
 package br.univel.model;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Id;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.Version;
-import java.lang.Override;
-import br.univel.model.Marca;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "modelo")
+@XmlRootElement
 public class Modelo implements Serializable
 {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE)
+   @GeneratedValue(strategy = GenerationType.AUTO)
    @Column(name = "id", updatable = false, nullable = false)
    private Long id;
    @Version

@@ -1,27 +1,24 @@
 package br.univel.model;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Id;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
-import java.lang.Override;
-import java.util.Set;
-import java.util.HashSet;
-import br.univel.model.Carro;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "categoria")
+@XmlRootElement
 public class Categoria implements Serializable
 {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE)
+   @GeneratedValue(strategy = GenerationType.AUTO)
    @Column(name = "id", updatable = false, nullable = false)
    private Long id;
    @Version
@@ -30,9 +27,6 @@ public class Categoria implements Serializable
 
    @Column(name = "descricao")
    private String descricao;
-
-   @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-   private Set<Carro> carros = new HashSet<Carro>();
 
    public Long getId()
    {
@@ -102,15 +96,5 @@ public class Categoria implements Serializable
       if (descricao != null && !descricao.trim().isEmpty())
          result += "descricao: " + descricao;
       return result;
-   }
-
-   public Set<Carro> getCarros()
-   {
-      return this.carros;
-   }
-
-   public void setCarros(final Set<Carro> carros)
-   {
-      this.carros = carros;
    }
 }
