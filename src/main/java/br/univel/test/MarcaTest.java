@@ -8,25 +8,25 @@ import javax.persistence.PersistenceContextType;
 
 import org.junit.Test;
 
-import br.univel.model.Categoria;
+import br.univel.model.Marca;
 
-public class CategoriaTest {
+public class MarcaTest {
 
 	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 
 	@Test
-	public void testPersistCategoria() {
+	public void testPersistMarca() {
 
 		boolean flag = false;
 
 		for (int i = 0; i < 10; i++) { 
 			
-			Categoria c = new Categoria();
-			c.setDescricao("Categoria " + i);
+			Marca m = new Marca();
+			m.setNome("Marca " + i);
 			
 			try {
-				entityManager.persist(c);
+				entityManager.persist(m);
 				flag = true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -37,26 +37,26 @@ public class CategoriaTest {
 	}
 
 	@Test
-	public void testFindCategoria() {
-		Categoria teste = entityManager.find(Categoria.class, 1);
+	public void testFindMarca() {
+		Marca teste = entityManager.find(Marca.class, 1);
 		assertEquals(true, teste != null);
 	}
 
 	@Test
-	public void testUpdateCategoria() {
-		Categoria teste = entityManager.find(Categoria.class, 1);
-		teste.setDescricao("Novo Categoria");
+	public void testUpdateMarca() {
+		Marca teste = entityManager.find(Marca.class, 1);
+		teste.setNome("Nova Marca");
 
 		entityManager.persist(teste);
 		
-		Categoria atualizado = entityManager.find(Categoria.class, 1);
+		Marca atualizado = entityManager.find(Marca.class, 1);
 		
-		assertEquals(teste.getDescricao(), atualizado.getDescricao());
+		assertEquals(teste.getNome(), atualizado.getNome());
 	}
 
 	@Test
-	public void testRemoveCategoria() {
-		Categoria teste = entityManager.find(Categoria.class, 1);
+	public void testRemoveMarca() {
+		Marca teste = entityManager.find(Marca.class, 1);
 		boolean ok = false;
 		try {
 			entityManager.remove(teste);
